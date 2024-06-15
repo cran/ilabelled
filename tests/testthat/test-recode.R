@@ -1,9 +1,11 @@
 
+set.seed(1234)
 x <- data.frame(
   V1 = i_labelled(c(1:4,-9), labels = c("A" = 1, "B" = 2, "C" = 3, "D" = 4), na_values = -9),
   V2 = factor(c(LETTERS[1:4], "X")),
   V3 = c(LETTERS[1:4], "X"),
-  V4 = c(1:4,-9)
+  V4 = c(1:4,-9),
+  V5 = round(rnorm(5, sd = 1, mean = 1), 2)
 )
 
 ## success handling
@@ -67,4 +69,31 @@ test_that("... must be formula", {
   expect_error(i_recode(iris, "AB" = c(1, 2), "CD" = 2 ~ c(3, 4)))
 })
 
+
+test_that("i_recode: copy param - copy data when vector is provided", {
+  testVec <- i_labelled(1:3, labels = c("A" = 1, "B" = 2, "A_dubplicated_" = 3))
+
+  # copy is FALSE
+  ret1 <- i_labelled(c(NA,NA,1), labels = c("A" = 1))
+  expect_equal(i_recode(testVec, "A" = 1 ~ x == 3, copy = FALSE), ret1)
+
+  # copy is TRUE
+  ret2 <- i_labelled(c(1,2,1), labels = c("A" = 1))
+  expect_equal(i_recode(testVec, "A" = 1 ~ x == 3, copy = TRUE), ret2)
+})
+
+
+test_that("i_recode: copy param - copy data when data.frame is provided", {
+  testData <- data.frame(
+    V1 = i_labelled(1:3, labels = c("A" = 1, "B" = 2, "A_dubplicated_" = 3))
+  )
+
+  # copy is FALSE
+  ret1 <- i_labelled(c(NA,NA,1), labels = c("A" = 1))
+  expect_equal(i_recode(testData, "A" = 1 ~ V1 == 3), ret1)
+
+  # copy is TRUE
+  ret2 <- i_labelled(c(1,2,1), labels = c("A" = 1))
+  expect_equal(i_recode(testData, "A" = 1 ~ V1 == 3, copy = "V1"), ret2)
+})
 

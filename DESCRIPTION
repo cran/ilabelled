@@ -1,7 +1,7 @@
 Package: ilabelled
 Type: Package
 Title: Simple Handling of Labelled Data
-Version: 0.1.0
+Version: 0.9.0
 Authors@R: c(person("Christof", "Lewerenz", role = c("aut", "cre"), email = "christof.lewerenz@gmx.net"))
 Author: Christof Lewerenz [aut, cre]
 Maintainer: Christof Lewerenz <christof.lewerenz@gmx.net>
@@ -9,14 +9,15 @@ Description: Simple handling of survey data. Smart handling of meta-information 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en-US
-Suggests: testthat (>= 3.0.0)
+Suggests: knitr, rmarkdown, testthat (>= 3.0.0)
 Imports: methods, stats
 URL: https://github.com/clewerenz/ilabelled
 BugReports: https://github.com/clewerenz/ilabelled/issues
 Config/testthat/edition: 3
 RoxygenNote: 7.3.1
 Depends: R (>= 2.10)
+VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2024-05-31 23:01:36 UTC; lnx
+Packaged: 2024-06-15 09:09:18 UTC; lnx
 Repository: CRAN
-Date/Publication: 2024-06-04 09:51:52 UTC
+Date/Publication: 2024-06-15 09:30:02 UTC

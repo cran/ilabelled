@@ -8,6 +8,7 @@
 #' @importFrom stats setNames
 #' @returns returns x with value labels applied
 i_labels <- function(x, ..., overwrite = FALSE){
+
   if(!is.null(attr(x, "labels", TRUE)) & !overwrite){
     old_labs <- as.list(attr(x, "labels", TRUE))
   }else{
@@ -17,8 +18,12 @@ i_labels <- function(x, ..., overwrite = FALSE){
   if(!length(new_labs)){
     new_labs <- NULL
   }
+
   if(length(new_labs) == 1 && is.null(new_labs[[1]])){
     all_labs <- NULL
+  }else if(is.list(new_labs) && length(new_labs) == 1 && length(names(new_labs[[1]])) > 0){
+    new_labs <- as.list(unlist(new_labs))
+    all_labs <- .merge_labels(old_labs, new_labs)
   }else{
     all_labs <- .merge_labels(old_labs, new_labs)
   }
@@ -27,6 +32,10 @@ i_labels <- function(x, ..., overwrite = FALSE){
     stop("Cannot apply non-character value labels to non-numeric vector. Value labels must be character.")
   }else if(is.numeric(x) && !is.null(all_labs) && !is.numeric(all_labs)){
     stop("Cannot apply non-numeric value labels to numeric vector. Value labels must be numeric.")
+  }
+
+  if(!is.null(all_labs)){
+    all_labs <- all_labs[order(all_labs, decreasing = FALSE)]
   }
 
   structure(

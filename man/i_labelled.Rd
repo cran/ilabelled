@@ -11,6 +11,9 @@ i_labelled(
   na_values = NULL,
   na_range = NULL,
   scale = NULL,
+  annotation = NULL,
+  wording = NULL,
+  subject = NULL,
   ...
 )
 }
@@ -26,6 +29,12 @@ i_labelled(
 \item{na_range}{range of missing values as vector length 2 (e.g. c(-9,-1))}
 
 \item{scale}{scale level (nominal, ordinal, scale)}
+
+\item{annotation}{additional information about variable}
+
+\item{wording}{question text}
+
+\item{subject}{subject}
 
 \item{...}{further attributes passed to class}
 }

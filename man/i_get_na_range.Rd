@@ -10,7 +10,7 @@ i_get_na_range(x)
 \item{x}{vector or data.frame}
 }
 \value{
-Return missing range
+return missing range
 }
 \description{
 return missing range when applied to vector
