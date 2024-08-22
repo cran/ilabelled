@@ -1,7 +1,7 @@
 Package: ilabelled
 Type: Package
 Title: Simple Handling of Labelled Data
-Version: 0.9.0
+Version: 1.0.0
 Authors@R: c(person("Christof", "Lewerenz", role = c("aut", "cre"), email = "christof.lewerenz@gmx.net"))
 Author: Christof Lewerenz [aut, cre]
 Maintainer: Christof Lewerenz <christof.lewerenz@gmx.net>
@@ -14,10 +14,10 @@ Imports: methods, stats
 URL: https://github.com/clewerenz/ilabelled
 BugReports: https://github.com/clewerenz/ilabelled/issues
 Config/testthat/edition: 3
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Depends: R (>= 2.10)
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2024-06-15 09:09:18 UTC; lnx
+Packaged: 2024-08-21 15:17:30 UTC; lnx
 Repository: CRAN
-Date/Publication: 2024-06-15 09:30:02 UTC
+Date/Publication: 2024-08-22 03:20:02 UTC

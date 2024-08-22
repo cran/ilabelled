@@ -26,6 +26,7 @@ print.i_labelled <- function(x, ...){
   i_print_label(x)
   i_print_annotation(x)
   i_print_labels(x)
+  i_print_attributes(x, exclude = c("class", "wording", "subject", "na_values", "na_range", "scale", "label", "annotation", "labels"))
 
   invisible(x)
 }
@@ -41,7 +42,7 @@ i_print_labels <- function(x){
 
 #' @export
 i_print_labels.default <- function(x){
-  labels <- attr(x, "labels", TRUE)
+  labels <- attr(x, "labels", exact = TRUE)
   if(is.null(labels)){
     return(invisible(labels))
   }
@@ -61,11 +62,12 @@ i_print_label <- function(x){
 
 #' @export
 i_print_label.default <- function(x){
-  label <- attr(x, "label", TRUE)
+  label <- attr(x, "label", exact = TRUE)
   if(is.null(label)){
     return(invisible(label))
   }
-  cat("\nVariable label:", label, "\n")
+  cat(c("\nVariable label: ", label), sep = "\n ")
+  # cat("\nVariable label:", paste0(label, collapse = " / "), "\n")
 }
 
 
@@ -79,7 +81,7 @@ i_print_na_values <- function(x){
 
 #' @export
 i_print_na_values.default <- function(x){
-  na_values <- attr(x, "na_values", TRUE)
+  na_values <- attr(x, "na_values", exact = TRUE)
   if(is.null(na_values)){
     return(invisible(na_values))
   }
@@ -97,7 +99,7 @@ i_print_na_range <- function(x){
 
 #' @export
 i_print_na_range.default <- function(x){
-  na_range <- attr(x, "na_range", TRUE)
+  na_range <- attr(x, "na_range", exact = TRUE)
   if(is.null(na_range)){
     return(invisible(na_range))
   }
@@ -115,11 +117,11 @@ i_print_scale <- function(x){
 
 #' @export
 i_print_scale.default <- function(x){
-  scale <- attr(x, "scale", TRUE)
+  scale <- attr(x, "scale", exact = TRUE)
   if(is.null(scale)){
     return(invisible(scale))
   }
-  cat(paste0("\nScale level: ", scale), "\n")
+  cat(paste0("\nScale level: ", scale), sep = "\n")
 }
 
 
@@ -134,11 +136,11 @@ i_print_annotation <- function(x){
 
 #' @export
 i_print_annotation.default <- function(x){
-  annotation <- attr(x, "annotation", TRUE)
+  annotation <- attr(x, "annotation", exact = TRUE)
   if(is.null(annotation)){
     return(invisible(annotation))
   }
-  cat(c("\nAnnotation: ", annotation), sep = "\n")
+  cat(c("\nAnnotation: ", annotation), sep = "\n ")
 }
 
 
@@ -152,11 +154,11 @@ i_print_wording <- function(x){
 
 #' @export
 i_print_wording.default <- function(x){
-  wording <- attr(x, "wording", TRUE)
+  wording <- attr(x, "wording", exact = TRUE)
   if(is.null(wording)){
     return(invisible(wording))
   }
-  cat(c("\nWording:\n", wording, "\n"))
+  cat(c("\nWording:", wording), sep = "\n ")
 }
 
 
@@ -170,9 +172,33 @@ i_print_subject <- function(x){
 
 #' @export
 i_print_subject.default <- function(x){
-  subject <- attr(x, "subject", TRUE)
+  subject <- attr(x, "subject", exact = TRUE)
   if(is.null(subject)){
     return(invisible(subject))
   }
-  cat(c("\nsubject:\n", subject, "\n"))
+  cat(c("\nSubject:\n", subject, "\n"))
+}
+
+
+#' print attributes
+#' @returns No return value. Print attributes to console
+#' @param x vector
+#' @param exclude character vector with attribute names not taken into account
+#' @export
+i_print_attributes <- function(x, exclude = NULL){
+  UseMethod("i_print_attributes")
+}
+
+#' @export
+i_print_attributes.default <- function(x, exclude = NULL){
+  a <- attributes(x)
+  if(length(a) < 1){
+    return(invisible(a))
+  }
+  a <- a[!names(a) %in% exclude]
+  for(i in names(a)){
+    tmp <- a[[i]]
+    cat("\n", i, ":\n")
+    print(tmp)
+  }
 }

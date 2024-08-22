@@ -27,31 +27,15 @@ document.addEventListener('DOMContentLoaded', function(e) {
   }
 });
 </script>
-<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
-// v0.0.1
-// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
-
-document.addEventListener('DOMContentLoaded', function() {
-  const codeList = document.getElementsByClassName("sourceCode");
-  for (var i = 0; i < codeList.length; i++) {
-    var linkList = codeList[i].getElementsByTagName('a');
-    for (var j = 0; j < linkList.length; j++) {
-      if (linkList[j].innerHTML === "") {
-        linkList[j].setAttribute('aria-hidden', 'true');
-      }
-    }
-  }
-});
-</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
 
 
 
@@ -257,13 +241,38 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <div id="general-information" class="section level1">
 <h1>General Information</h1>
-<p>ilabelled was developed to address a fundamental problem in labeling values in R:</p>
+<p>ilabelled was developed to address a fundamental problem in labeling
+values in R:</p>
 <ol style="list-style-type: decimal">
-<li>Underlying values should not be changed when value labels are added (as is the case with the factor class).</li>
-<li>Value labels as well as underlying values should be able to be used as indices.</li>
+<li>Underlying values should not be changed when value labels are added
+(as is the case with the factor class).</li>
+<li>Value labels as well as underlying values should be able to be used
+as indices.</li>
 </ol>
-<p>In addition, the i_labelled class should encourage users to think directly about meta information about variables in the work process and add it to the variables.</p>
-<p>The basic idea behind this endeavor is to enable a similar handling of survey data as is the case in common social science statistical software such as SPSS or STATA.</p>
+<p>In addition, the i_labelled class should encourage users to think
+directly about meta information about variables in the work process and
+add it to the variables.</p>
+<p>The basic idea behind this endeavor is to enable a similar handling
+of survey data as is the case in common social science statistical
+software such as SPSS or STATA.</p>
+<div id="context" class="section level2">
+<h2>Context</h2>
+<p>R is a great software for working with data. However, there is a
+non-negligible disadvantage when it comes to handling categorical data
+and meta-information, such as variable labels or scale levels, and the
+like, as known from other statistical software, especially SPSS.</p>
+<p>The aim of this package is to introduce a data class in which meta
+information (variable-label, value-labels, missing-values, scale-level)
+can and should be directly included. In addition, one of the biggest
+disadvantages of the base R factor class is to be addressed: Numerical
+values are not changed if they are provided with value labels. Negative
+and non-sequential consecutive values are not changed. In other words:
+the underlying database is not changed by labeling. Nevertheless, the
+option of using value labels for indexing is offered.</p>
+<p>An intuitive syntax enables easy access to package-specific
+functions. All functions available for data manipulation can be
+controlled by an “i_*”.</p>
+</div>
 </div>
 
 
