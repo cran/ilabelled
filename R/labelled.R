@@ -23,22 +23,21 @@ i_labelled <- function(x, label = NULL, labels = NULL, na_values = NULL, na_rang
 
 #' @export
 i_labelled.default <- function(x, label = NULL, labels = NULL, na_values = NULL, na_range = NULL, scale = NULL, annotation = NULL, wording = NULL, subject = NULL, ...){
-  if(!is.atomic(x)){
-    stop("x must be vector")
-  }
+  if(!is.atomic(x)) stop("x must be vector")
 
   if(is.logical(labels)){
     labels <- stats::setNames(as.numeric(labels), names(labels))
   }
 
-  stopifnot(.valid_label(label))
-  stopifnot(.valid_na_values(na_values))
-  stopifnot(.valid_na_range(na_range))
+  if(!.valid_label(label)) stop("invalid labels value")
+  if(!.valid_na_values(na_values)) stop("invalid na_values value")
+  if(!.valid_na_range(na_range)) stop("invalid na_range value")
+  if(!.valid_labels(labels)) stop("invalid labels value")
 
   if(is.null(labels) && is.factor(x)){
     labels <- stats::setNames(1:length(levels(x)), levels(x))
-  }else if(!is.null(labels) || !is.null(attr(x, "labels", TRUE))){
-    labels <- .merge_labels(as.list(attr(x, "labels", TRUE)), as.list(labels))
+  }else if(!is.null(labels) || !is.null(attr(x, "labels", exact = TRUE))){
+    labels <- .merge_labels(new_labs = labels, old_labs = attr(x, "labels", exact = TRUE))
   }
 
   if(!is.numeric(x) && !is.logical(x) && !is.null(labels) && !is.character(labels)){
@@ -95,19 +94,17 @@ i_labelled.default <- function(x, label = NULL, labels = NULL, na_values = NULL,
 
 #' @export
 i_labelled.factor <- function(x, label = NULL, labels = NULL, na_values = NULL, na_range = NULL, scale = NULL, annotation = NULL, wording = NULL, subject = NULL, ...){
-  if(!is.atomic(x)){
-    stop("x must be vector")
-  }
-
-  stopifnot(.valid_label(label))
-  stopifnot(.valid_na_values(na_values))
-  stopifnot(.valid_na_range(na_range))
+  if(!is.atomic(x)) stop("x must be vector")
+  if(!.valid_label(label)) stop("invalid label value")
+  if(!.valid_na_values(na_values)) stop("invalid na_values value")
+  if(!.valid_na_range(na_range)) stop("invalid na_range value")
+  if(!.valid_labels(labels)) stop("invalid labels value")
 
   if(is.null(labels) && is.factor(x)){
     labels <- stats::setNames(1:length(levels(x)), levels(x))
   }
   if(!is.null(labels) || !is.null(attr(x, "labels", TRUE))){
-    labels <- .merge_labels(as.list(attr(x, "labels", TRUE)), as.list(labels))
+    labels <- .merge_labels(labels, attr(x, "labels", TRUE))
   }
 
   if(!is.null(labels) && !is.numeric(labels)){

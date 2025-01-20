@@ -1,7 +1,7 @@
 Package: ilabelled
 Type: Package
 Title: Simple Handling of Labelled Data
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(person("Christof", "Lewerenz", role = c("aut", "cre"), email = "christof.lewerenz@gmx.net"))
 Author: Christof Lewerenz [aut, cre]
 Maintainer: Christof Lewerenz <christof.lewerenz@gmx.net>
@@ -18,6 +18,6 @@ RoxygenNote: 7.3.2
 Depends: R (>= 2.10)
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2024-08-21 15:17:30 UTC; lnx
+Packaged: 2025-01-20 19:39:57 UTC; lnx
 Repository: CRAN
-Date/Publication: 2024-08-22 03:20:02 UTC
+Date/Publication: 2025-01-20 23:20:01 UTC
